@@ -19,7 +19,18 @@
     "index.js"
   ],
   "keywords": [
-    "gulpplugin"
+    "gulpplugin",
+    "js",
+    "javascript",
+    "syntax",
+    "errors",
+    "check",
+    "lint",
+    "parse",
+    "esprima",
+    "ast",
+    "source",
+    "code"
   ],
   "dependencies": {
     "event-stream": "~3.0.20",
@@ -27,6 +38,6 @@
     "esprima": "~1.0.4"
   },
   "devDependencies": {
-    "mocha": "~1.x"
+    "mocha": "*"
   }
 }
