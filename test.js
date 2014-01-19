@@ -4,14 +4,14 @@ var gutil = require('gulp-util');
 var jsValidate = require('./index');
 
 it('should log error on syntax errors', function (cb) {
-	gutil.log = function () {
-		var str = [].slice.call(arguments).join(' ');
+	var stream = jsValidate();
 
-		if (/Line 1: Unexpected token let/.test(str)) {
-			assert(true);
-			cb();
-		}
-	};
+	stream.on('error', function (err) {
+		assert(true);
+		cb();
+	});
 
-	jsValidate().write(new gutil.File({contents: 'var let = "foo";'}));
+	stream.write(new gutil.File({
+		contents: new Buffer('var let = "foo"')
+	}));
 });

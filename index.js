@@ -1,22 +1,34 @@
 'use strict';
-var es = require('event-stream');
 var gutil = require('gulp-util');
+var through = require('through2');
 var esprima = require('esprima');
 
-function error(str) {
-	gutil.log('gulp-jsvalidate:', gutil.colors.red(str));
-}
-
 module.exports = function () {
-	return es.map(function (file, cb) {
-		try {
-			esprima.parse(String(file.contents), {tolerant: true}).errors.forEach(function (err) {
-				error(err.message);
-			});
-		} catch (err) {
-			error(err.message);
+	return through.obj(function (file, enc, cb) {
+		if (file.isNull()) {
+			this.push(file);
+			return cb();
 		}
 
-		cb(null, file);
+		if (file.isStream()) {
+			this.emit('error', new gutil.PluginError('gulp-jsvalidate', 'Streaming not supported'));
+			return cb();
+		}
+
+		var errors;
+
+		try {
+			errors = esprima.parse(file.contents.toString(), {tolerant: true}).errors;
+		} catch (err) {
+			err.message = 'gulp-jsvalidate: ' + err.message;
+			this.emit('error', new gutil.PluginError('gulp-jsvalidate', err));
+		}
+
+		if (errors && errors.length > 0) {
+			this.emit('error', new gutil.PluginError('gulp-jsvalidate', '\n' + errors.join('\n')));
+		}
+
+		this.push(file);
+		cb();
 	});
 };
