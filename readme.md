@@ -21,7 +21,7 @@ var gulp = require('gulp');
 var jsValidate = require('gulp-jsvalidate');
 
 gulp.task('default', function () {
-	gulp.src('app.js')
+	return gulp.src('app.js')
 		.pipe(jsValidate());
 });
 ```
