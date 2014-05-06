@@ -1,6 +1,6 @@
 {
   "name": "gulp-jsvalidate",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Validate JavaScript code and report possible syntax errors",
   "license": "MIT",
   "repository": "sindresorhus/gulp-jsvalidate",
