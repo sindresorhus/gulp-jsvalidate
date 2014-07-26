@@ -20,12 +20,14 @@ module.exports = function () {
 		try {
 			errors = esprima.parse(file.contents.toString(), {tolerant: true}).errors;
 		} catch (err) {
-			err.message = 'gulp-jsvalidate: ' + err.message;
-			this.emit('error', new gutil.PluginError('gulp-jsvalidate', err));
+			this.emit('error', new gutil.PluginError('gulp-jsvalidate', err, {fileName: file.path}));
 		}
 
 		if (errors && errors.length > 0) {
-			this.emit('error', new gutil.PluginError('gulp-jsvalidate', '\n' + errors.join('\n')));
+			this.emit('error', new gutil.PluginError('gulp-jsvalidate', '\n' + errors.join('\n'), {
+				fileName: file.path,
+				showStack: false
+			}));
 		}
 
 		this.push(file);
