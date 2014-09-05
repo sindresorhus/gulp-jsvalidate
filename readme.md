@@ -1,4 +1,4 @@
-# [gulp](http://gulpjs.com)-jsvalidate [![Build Status](https://travis-ci.org/sindresorhus/gulp-jsvalidate.svg?branch=master)](https://travis-ci.org/sindresorhus/gulp-jsvalidate)
+# gulp-jsvalidate [![Build Status](https://travis-ci.org/sindresorhus/gulp-jsvalidate.svg?branch=master)](https://travis-ci.org/sindresorhus/gulp-jsvalidate)
 
 > Validate JavaScript code and report possible syntax errors
 
@@ -9,7 +9,7 @@ The earlier you find syntax errors, the earlier you can fix them.
 
 ## Install
 
-```bash
+```sh
 $ npm install --save-dev gulp-jsvalidate
 ```
 
@@ -29,4 +29,4 @@ gulp.task('default', function () {
 
 ## License
 
-[MIT](http://opensource.org/licenses/MIT) © [Sindre Sorhus](http://sindresorhus.com)
+MIT © [Sindre Sorhus](http://sindresorhus.com)

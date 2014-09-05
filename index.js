@@ -6,13 +6,13 @@ var esprima = require('esprima');
 module.exports = function () {
 	return through.obj(function (file, enc, cb) {
 		if (file.isNull()) {
-			this.push(file);
-			return cb();
+			cb(null, file);
+			return;
 		}
 
 		if (file.isStream()) {
-			this.emit('error', new gutil.PluginError('gulp-jsvalidate', 'Streaming not supported'));
-			return cb();
+			cb(new gutil.PluginError('gulp-jsvalidate', 'Streaming not supported'));
+			return;
 		}
 
 		var errors;
@@ -30,7 +30,6 @@ module.exports = function () {
 			}));
 		}
 
-		this.push(file);
-		cb();
+		cb(null, file);
 	});
 };
