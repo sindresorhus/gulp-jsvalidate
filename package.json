@@ -33,7 +33,7 @@
     "code"
   ],
   "dependencies": {
-    "esprima": "^1.2.1",
+    "esprima": "^2.0.0",
     "gulp-util": "^3.0.0",
     "through2": "^0.6.1"
   },
