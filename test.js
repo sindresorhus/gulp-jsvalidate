@@ -12,6 +12,6 @@ it('should log error on syntax errors', function (cb) {
 	});
 
 	stream.write(new gutil.File({
-		contents: new Buffer('var let = "foo"')
+		contents: new Buffer('var foo = \'bar;')
 	}));
 });

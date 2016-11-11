@@ -38,6 +38,7 @@
     "through2": "^2.0.0"
   },
   "devDependencies": {
+    "gulp": "^3.9.1",
     "mocha": "*"
   }
 }
