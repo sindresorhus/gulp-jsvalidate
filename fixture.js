@@ -1,1 +1,1 @@
-var foo = 'bar;
+const foo = 'bar;

@@ -1,8 +1,8 @@
 'use strict';
-var gulp = require('gulp');
-var jsValidate = require('./');
+const gulp = require('gulp');
+const jsValidate = require('./');
 
-gulp.task('default', function () {
-	return gulp.src('fixture.js')
-		.pipe(jsValidate());
-});
+gulp.task('default', () =>
+	gulp.src('fixture.js')
+		.pipe(jsValidate())
+);

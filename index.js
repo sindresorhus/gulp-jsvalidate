@@ -1,9 +1,9 @@
 'use strict';
-var gutil = require('gulp-util');
-var through = require('through2');
-var esprima = require('esprima');
+const gutil = require('gulp-util');
+const through = require('through2');
+const esprima = require('esprima');
 
-module.exports = function () {
+module.exports = () => {
 	return through.obj(function (file, enc, cb) {
 		if (file.isNull()) {
 			cb(null, file);
@@ -15,7 +15,7 @@ module.exports = function () {
 			return;
 		}
 
-		var errors;
+		let errors;
 
 		try {
 			errors = esprima.parse(file.contents.toString(), {tolerant: true}).errors;

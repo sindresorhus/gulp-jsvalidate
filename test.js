@@ -1,17 +1,18 @@
-'use strict';
-var assert = require('assert');
-var gutil = require('gulp-util');
-var jsValidate = require('./');
+import test from 'ava';
+import gutil from 'gulp-util';
+import m from './';
 
-it('should log error on syntax errors', function (cb) {
-	var stream = jsValidate();
+test.cb(t => {
+	t.plan(1);
 
-	stream.on('error', function (err) {
-		assert(true);
-		cb();
+	const stream = m();
+
+	stream.on('error', () => {
+		t.pass();
+		t.end();
 	});
 
 	stream.write(new gutil.File({
-		contents: new Buffer('var foo = \'bar;')
+		contents: new Buffer('const foo = \'bar;')
 	}));
 });
