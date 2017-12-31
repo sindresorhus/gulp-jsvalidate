@@ -1,6 +1,6 @@
 import test from 'ava';
-import gutil from 'gulp-util';
-import m from './';
+import Vinyl from 'vinyl';
+import m from '.';
 
 test.cb(t => {
 	t.plan(1);
@@ -12,7 +12,7 @@ test.cb(t => {
 		t.end();
 	});
 
-	stream.write(new gutil.File({
-		contents: new Buffer('const foo = \'bar;')
+	stream.end(new Vinyl({
+		contents: Buffer.from('const foo = \'bar;')
 	}));
 });

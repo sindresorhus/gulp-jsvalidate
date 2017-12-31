@@ -1,7 +1,7 @@
 'use strict';
-const gutil = require('gulp-util');
 const through = require('through2');
 const esprima = require('esprima');
+const PluginError = require('plugin-error');
 
 module.exports = () => {
 	return through.obj(function (file, enc, cb) {
@@ -11,7 +11,7 @@ module.exports = () => {
 		}
 
 		if (file.isStream()) {
-			cb(new gutil.PluginError('gulp-jsvalidate', 'Streaming not supported'));
+			cb(new PluginError('gulp-jsvalidate', 'Streaming not supported'));
 			return;
 		}
 
@@ -20,11 +20,11 @@ module.exports = () => {
 		try {
 			errors = esprima.parse(file.contents.toString(), {tolerant: true}).errors;
 		} catch (err) {
-			this.emit('error', new gutil.PluginError('gulp-jsvalidate', err, {fileName: file.path}));
+			this.emit('error', new PluginError('gulp-jsvalidate', err, {fileName: file.path}));
 		}
 
 		if (errors && errors.length > 0) {
-			this.emit('error', new gutil.PluginError('gulp-jsvalidate', '\n' + errors.join('\n'), {
+			this.emit('error', new PluginError('gulp-jsvalidate', '\n' + errors.join('\n'), {
 				fileName: file.path,
 				showStack: false
 			}));
