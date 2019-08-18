@@ -20,13 +20,8 @@ $ npm install --save-dev gulp-jsvalidate
 const gulp = require('gulp');
 const jsValidate = require('gulp-jsvalidate');
 
-gulp.task('default', () =>
+exports.default = () => (
 	gulp.src('app.js')
 		.pipe(jsValidate())
 );
 ```
-
-
-## License
-
-MIT © [Sindre Sorhus](https://sindresorhus.com)

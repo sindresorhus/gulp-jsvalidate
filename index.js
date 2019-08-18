@@ -4,14 +4,14 @@ const esprima = require('esprima');
 const PluginError = require('plugin-error');
 
 module.exports = () => {
-	return through.obj(function (file, enc, cb) {
+	return through.obj(function (file, encoding, callback) {
 		if (file.isNull()) {
-			cb(null, file);
+			callback(null, file);
 			return;
 		}
 
 		if (file.isStream()) {
-			cb(new PluginError('gulp-jsvalidate', 'Streaming not supported'));
+			callback(new PluginError('gulp-jsvalidate', 'Streaming not supported'));
 			return;
 		}
 
@@ -19,8 +19,8 @@ module.exports = () => {
 
 		try {
 			errors = esprima.parse(file.contents.toString(), {tolerant: true}).errors;
-		} catch (err) {
-			this.emit('error', new PluginError('gulp-jsvalidate', err, {fileName: file.path}));
+		} catch (error_) { // eslint-disable-line unicorn/catch-error-name
+			this.emit('error', new PluginError('gulp-jsvalidate', error_, {fileName: file.path}));
 		}
 
 		if (errors && errors.length > 0) {
@@ -30,6 +30,6 @@ module.exports = () => {
 			}));
 		}
 
-		cb(null, file);
+		callback(null, file);
 	});
 };
