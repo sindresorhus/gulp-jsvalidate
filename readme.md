@@ -6,13 +6,11 @@
 
 The earlier you find syntax errors, the earlier you can fix them.
 
-
 ## Install
 
 ```
 $ npm install --save-dev gulp-jsvalidate
 ```
-
 
 ## Usage
 
