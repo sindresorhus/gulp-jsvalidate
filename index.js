@@ -3,7 +3,9 @@ const through = require('through2');
 const esprima = require('esprima');
 const PluginError = require('plugin-error');
 
-module.exports = () => {
+module.exports = ({module: useModule = true} = {}) => {
+	const parse = useModule ? esprima.parseModule : esprima.parseScript;
+
 	return through.obj(function (file, encoding, callback) {
 		if (file.isNull()) {
 			callback(null, file);
@@ -18,7 +20,7 @@ module.exports = () => {
 		let errors;
 
 		try {
-			errors = esprima.parse(file.contents.toString(), {tolerant: true}).errors;
+			errors = parse(file.contents.toString(), {tolerant: true}).errors;
 		} catch (error_) { // eslint-disable-line unicorn/catch-error-name
 			this.emit('error', new PluginError('gulp-jsvalidate', error_, {fileName: file.path}));
 		}

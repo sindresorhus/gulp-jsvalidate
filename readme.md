@@ -23,3 +23,18 @@ exports.default = () => (
 		.pipe(jsValidate())
 );
 ```
+
+## API
+
+### gulpJsValidate(options?)
+
+#### options
+
+Type: `object`
+
+##### module
+
+Type: `boolean`\
+Default: `true`
+
+Parse the JavaScript code as a [ES2015 module](https://exploringjs.com/impatient-js/ch_modules.html) instead of a script.
