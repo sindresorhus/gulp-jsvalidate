@@ -1,4 +1,4 @@
-# gulp-jsvalidate [![Build Status](https://travis-ci.org/sindresorhus/gulp-jsvalidate.svg?branch=master)](https://travis-ci.org/sindresorhus/gulp-jsvalidate)
+# gulp-jsvalidate
 
 > Validate JavaScript code and report possible syntax errors
 
