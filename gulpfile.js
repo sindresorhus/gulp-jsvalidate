@@ -1,8 +1,7 @@
-'use strict';
-const gulp = require('gulp');
-const jsValidate = require('.');
+import gulp from 'gulp';
+import jsValidate from './index.js';
 
-exports.default = () => (
-	gulp.src('fixture.js')
-		.pipe(jsValidate())
-);
+export default function main() {
+	return gulp.src('fixture.js')
+		.pipe(jsValidate());
+}

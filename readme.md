@@ -8,17 +8,17 @@ The earlier you find syntax errors, the earlier you can fix them.
 
 ## Install
 
-```
-$ npm install --save-dev gulp-jsvalidate
+```sh
+npm install --save-dev gulp-jsvalidate
 ```
 
 ## Usage
 
 ```js
-const gulp = require('gulp');
-const jsValidate = require('gulp-jsvalidate');
+import gulp from 'gulp';
+import jsValidate from 'gulp-jsvalidate';
 
-exports.default = () => (
+export default () => (
 	gulp.src('app.js')
 		.pipe(jsValidate())
 );
