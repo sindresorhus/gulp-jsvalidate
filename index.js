@@ -1,15 +1,20 @@
-import esprima from 'esprima';
+import {parse} from '@babel/parser';
 import {gulpPlugin} from 'gulp-plugin-extras';
 
 export default function gulpJsValidate({module: useModule = true} = {}) {
-	const parse = useModule ? esprima.parseModule : esprima.parseScript;
-
 	return gulpPlugin('gulp-jsvalidate', file => {
-		const {errors} = parse(file.contents.toString(), {tolerant: true});
+		try {
+			parse(file.contents.toString(), {
+				sourceType: useModule ? 'module' : 'script',
+				sourceFilename: file.basename,
+			});
+		} catch (error) {
+			if (error instanceof SyntaxError) {
+				const formattedError = new Error(`\n${error.message}`);
+				formattedError.isPresentable = true;
+				throw formattedError;
+			}
 
-		if (errors.length > 0) {
-			const error = new Error(`\n${errors.join('\n')}`);
-			error.isPresentable = true;
 			throw error;
 		}
 

@@ -9,10 +9,11 @@ test('main', async t => {
 	const errorPromise = pEvent(stream);
 
 	stream.end(new Vinyl({
-		contents: Buffer.from('const foo = \'bar;'),
+		path: import.meta.url,
+		contents: Buffer.from('const foo = \'bar;\nlet undefinedVariable;undefinedVariable ??= \'Hello\';'),
 	}));
 
-	await t.throwsAsync(errorPromise, {message: /Unexpected token/});
+	await t.throwsAsync(errorPromise, {message: /Unterminated string constant/});
 });
 
 test('supports `import`', async t => {
@@ -20,6 +21,7 @@ test('supports `import`', async t => {
 	const errorPromise = pEvent(stream, 'data');
 
 	stream.end(new Vinyl({
+		path: import.meta.url,
 		contents: Buffer.from('import foo from \'foo\';'),
 	}));
 
